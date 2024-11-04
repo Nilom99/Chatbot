@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helping Bot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #009dff, #02f6b9);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+        .chat-container {
+            background: linear-gradient(to right,  #02f6b9,#009dff);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgb(0, 0, 0);
+            width: 400px;
+            max-width: 90%;
+            overflow: hidden;
+            align-items: center;
+        }
+        .bot:hover{
+            color: red;
+        }
+        .chat-box {
+            height: 300px;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid rgb(0, 0, 0);
+        }
+        .chat-message {
+            margin: 10px 0;
+        }
+        .user {
+            text-align: right;
+            color: rgb(155, 255, 000);
+            padding: 1px;
+            background-color: #009dff;
+        }
+        .user:hover {
+            color: orange;
+        }
+        .bot {
+            text-align: left;
+            color: rgb(255, 0, 255);
+            background-color: #02f6b9;
+        }
+        input[type="text"] {
+            width: calc(100% - 70px);
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            align-self: center;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #0072ff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="How can I help you?">
+        <button id="send-button">Send</button>
+    </div>
+    <script>
+        document.getElementById('send-button').addEventListener('click', sendMessage);
+document.getElementById('user-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        sendMessage();
+    }
+});
+function sendMessage() {
+    const userInput = document.getElementById('user-input');
+    const message = userInput.value.trim();
+    if (message) {
+        appendMessage(message, 'user');
+        userInput.value = '';
+        // Simulate bot response
+        setTimeout(() => {
+            const botResponse = getBotResponse(message);
+            appendMessage(botResponse, 'bot');
+        }, 500);
+    }
+}
+function appendMessage(message, sender) {
+    const chatBox = document.getElementById('chat-box');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}`;
+    messageDiv.textContent = message;
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom                                                                                                                                                                                                                                                                                                   @copyright Abdus Nilom
+}
+function getBotResponse(input) {
+    // Simple keyword-based responses
+    const responses = {
+        'hi': 'Hello! How can I help you today?',
+        'how are you?': 'I am just a idiot roasting bot, but I am roasting you well!',
+        'bye': 'Roastbye! Have a roasted day!',
+        'Can you give me a code': 'Yeah! Sure, why not!',
+        'can you provide me a code': 'Yeah! Sure, why not!',
+        'nisha': 'Chulwali/A bengali word meaning Night.',
+        'nilom': 'My creator!',
+        'are you mad': 'Like You!',
+        'are you mad?': 'Like your brain!',
+        'mad': 'A mental state!',
+        'you mad': 'Not more than you.',
+        'translate this word': 'Type the word and tell the language!',
+        'prdvbdcp': 'You Fool!',
+        'coding': 'You can not understand.',
+        'jnv': 'Jivan Nasta Vidyalaya',
+        'thanks': 'Say it to my creator!',
+        'thank you': 'Goes to my creator',
+        'you are mad': 'Better than you!',
+        'are you foolish': 'Like you!',
+        'are you fool': 'Like your mind!',
+        'you are foolish': 'Not more than you!',
+        'i hate you': 'But I not!',
+        'you are idiot': 'I do not mind!',
+        'idiot': 'An english word used for whome you can not tolerate.',
+        'what is the time': 'See on your device.',
+        'say time': 'See on your device',
+        'bot': 'Computer programed idiots!',
+        'you bot': 'I do not think',
+        'nice': 'Good comment! / Churalni',
+        'sabana': 'Jhabri Gandha wali',
+        'hanifa': 'Silent film',
+        'style': 'Nisha Nice Sabana Besi Mare',
+        'dablu': 'Raihan dablu, IND Sonu',
+        'sonu': 'dablu Khan',
+        'apu': 'Hijibiji Experiments',
+        'nahida': 'IV',
+        'murshida': 'Dhongwali',
+        'murshidabad': 'Historical City',
+        'berhampore': 'Bekar city',
+        'kolkata': 'Zoo city',
+        'switzerland': 'Dream City',
+        'kohinur': 'Sabanar dream', 
+        'minecraft': 'Best game / Most played game!',
+        'katukutu': 'Give it to sabana Nisha Nice ',
+        'reels': 'Made by Sabana',
+        'makeup': 'Most done by Nice Parvin',
+        'tousif': 'Worst Rider',
+        'endur': 'Chuha!',
+        'mom': 'say it Ma!',
+        'free fire': 'Worst Game of the century!',
+        'shiwalik': 'Lower parts of the Himalayas.',
+        'who are you': 'I am your idiot chatbot Assistant',
+        'a': 'A for Apple',
+        'b': 'B for Bara Apple',
+        'c': 'C for Chota Apple',
+        'd': 'D for Double Apple',
+        'e': 'E for Extra Apple',
+        'f': 'F for Faltu Apple',
+        'g': 'G for Gobar Apple',
+        'h': 'H for Halka Apple',
+        'i': 'I for Imly Apple',
+        '.': 'Say something',
+        ',': 'Say something',
+        '?': 'Say something',
+        'j': 'J for Joking Apple',
+        'k': 'K for King of Apple',
+        'l': 'L for Loustrous Apple',
+        'm': 'M for Many Apple',
+        'n': 'N for Nanga Apple',
+        'o': 'O for Omlet of Apple',
+        'p': 'P for Plastic ka Apple',
+        'q': 'Q for Q hai Apple',
+        'r': 'R for Readymade Aple',
+        's': 'S for saitani Apple',
+        't': 'T for Tamed Apple',
+        'u': 'U for Umbrela Ka Apple',
+        'v': 'V for Nothing',
+        'w': 'W for Worst Apple',
+        'x': 'X for Xender',
+        'y': 'Y for yo yo apple',
+        'z': 'Z for Zordar Apple',
+        'ind sonu': 'dablu khan',
+        'mobarok': 'the hathi',
+        'xean': 'hathir bhai',
+        'xeankiller': 'hathir sister',
+        'hijibiji': 'Jemon Temon Picture',
+        'pokemon': 'Best Anime',
+        'jujustu': 'worst Anime',
+        'naruto': 'worse Anime',
+        'dragon ball': 'Good Anime',
+        'ncert': 'National Council of Educational Research and Training',
+        'bsf': 'Border Security Force',
+        'cod': 'Call of Duty',
+        'raihan': 'Dablu GMW IND sonu Dablu',
+        'by': 'Roastbye! Have a roasted day',
+        'pagol': 'You fool!',
+        'abcd': 'American Born Confused Desi',
+        'hh': 'Hi Hello idiot',
+        'ff': 'Full Form idiot',
+        'jk': 'Javelin Killer',
+        'bb': 'Best Boys',
+        'i am': 'An idiot',
+        'dhruv rathee': 'My inspiration',
+        'gsfs': 'Get set Fly Science',
+        'nsps': 'Netaji Subhas Public School',
+        'bangla': 'The Language Bengali',
+        'hindi': 'The Language Hindi',
+        'cc': 'Horse Power',
+        'html': 'It is made with',
+        'css': 'Skin of HTML',
+        'js': 'Brain of HTML',
+        'html css js': 'It is made with',
+        'haga': 'Poty',
+        'hagu': 'Done Every Morning',
+        'huge': 'Big Bigger Biggest',
+        'tiny': 'Small Smaller Smallest',
+        'good': 'Better Best',
+        'gopal': 'Takla',
+        'honey': 'Sweet',
+        'bunny': 'Ginipig',
+        'kitty': 'beautyfull',
+        'grammar': 'Nobody Obey',
+        'drawing': 'Favourite Work',
+        'gaming': 'Ma ki dat',
+        'gamer': 'Everyone likes',
+        'pant': 'underwere',
+        'gadha': 'honey',
+        'popat': 'Tumhara ho gaya',
+        'cartoon': 'Seen by childs',
+        'window': 'Used to peep',
+        'you are my best freind': 'No I can not make!',
+        'are you my best freind': 'No I do not think!',
+        'lap': 'Top',
+        'happy birthday': 'My birthday is on 4th November!',
+        'avengers': 'Endgame is my Favourite',
+        'marvel': 'Cinamatic Universe',
+        'belt': 'worn by girls on ther head',
+        'macbook': 'It is not a book',
+        'cup': 'Used to take tea',
+        'shoe': 'Made to protect our feet,but not used as protector.',
+        'viewing tv': 'Every Students Dream',
+        'who are you': 'Your idiot freind',
+        'mouse': 'Driven by you',
+        'google': 'A mad Softwere',
+        'iphone': 'Worst phone',
+        'hair': 'The worst',
+        'brother': 'sister',
+        'sister': 'mother',
+        'mother': 'father',
+        'father': 'brother',
+        'watch': 'T800 Ultra',
+        'hitler': 'Science Enthusiast',
+        'i do it': 'By A Chatbot',
+        'enter': 'Do it',
+        'shift': 'Change',
+        'mouse pad': 'PAD PAD MAD',
+        'pc': 'My Computer',
+        'psu': 'Power Supply Unit',
+        'mobile': 'Everyone Needs',
+        'index': 'xray',
+        'xray': 'index',
+        'i need you': 'I am always with You!',
+        'i do not need you': 'Why you are using me',
+        'zoo': 'Modern forest',
+        'tell me': 'What!',
+        'narration': 'Speech!',
+        'what is coding': 'You can not understand!',
+        'portforwarding': 'Forwarding Port 5500',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+        '': '',
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    };
+    return responses[input.toLowerCase()] || "Didn't Coded.";
+}
+    </script>
+    
+</body>
+</html>
